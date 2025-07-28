@@ -1,0 +1,13 @@
+<!-- wp:group {"className":"site-wrapper mx-auto container-sm","layout":{"type":"constrained"}} -->
+<div class="wp-block-group site-wrapper mx-auto container-sm"><!-- wp:image {"id":108,"width":225,"height":141,"sizeSlug":"medium","linkDestination":"none","className":"is-style-default site-thumbnail"} -->
+<figure class="wp-block-image size-medium is-resized is-style-default site-thumbnail"><img src="http://localhost:10003/wp-content/uploads/2023/02/SPUC-screenshot-300x188.webp" alt="Spirit West United Church Landing page" class="wp-image-108" width="225" height="141"/></figure>
+<!-- /wp:image -->
+
+<!-- wp:heading {"className":"site-title"} -->
+<h2 class="site-title">Spirit West United Church</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph {"className":"site-description"} -->
+<p class="site-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec venenatis magna erat, id tincidunt elit tincidunt efficitur. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam accumsan condimentum lacus, et mattis lacus dictum et.</p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:group -->

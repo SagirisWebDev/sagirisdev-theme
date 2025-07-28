@@ -1,0 +1,91 @@
+@import "tailwindcss";
+
+@plugin "@tailwindcss/forms" {
+  strategy: "base";
+  strategy: "class";
+}
+
+@font-face {
+  font-family: "Bank-Gothic-Regular";
+  src: url("assets/fonts/bank-gothic/bank_gothic_medium_bt-webfont.woff2") format("woff2"), url("assets/fonts/bank-gothic/bank_gothic_medium_bt--webfont.woff") format("woff");
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Blinker-Regular";
+  src: url("assets/fonts/blinker/blinker-regular-webfont.woff2") format("woff2"),url("assets/fonts/blinker/blinker-regular-webfont.woff") format("woff");
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Bank-Gothic-Light";
+  src: url("assets/fonts/bank-gothic/bank_gothic_light_regular-webfont.woff2") format("woff2"), url("assets/fonts/bank-gothic/bank_gothic_light_regular-webfont.woff") format("woff");
+  font-weight: 300;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Bank-Gothic-Bold";
+  src: url("assets/fonts/bank-gothic/bank_gothic_bold-webfont.woff2") format("woff2"),url("assets/fonts/bank-gothic/bank_gothic_bold-webfont.woff") format("woff");
+  font-weight: 700;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Blinker-Light";
+  src: url("assets/fonts/blinker/blinker-light-webfont.woff2") format("woff2"),url("assets/fonts/blinker/blinker-light-webfont.woff") format("woff");
+  font-weight: 300;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Blinker-Thin";
+  src: url("assets/fonts/blinker/blinker-thin-webfont.woff2") format("woff2"),url("assets/fonts/blinker/blinker-thin-webfont.woff") format("woff");
+  font-weight: 100;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Blinker-Bold";
+  src: url("assets/fonts/blinker/blinker-bold-webfont.woff2") format("woff2"),url("assets/fonts/blinker/blinker-bold-webfont.woff") format("woff");
+  font-weight: 700;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Blinker-Black";
+  src: url("assets/fonts/blinker/blinker-black-webfont.woff2") format("woff2"),url("assets/fonts/blinker/blinker-black-webfont.woff") format("woff");
+  font-weight: 900;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Blinker-SemiBold";
+  src: url("assets/fonts/blinker/blinker-semibold-webfont.woff2") format("woff2"),url("assets/fonts/blinker/blinker-semibold-webfont.woff") format("woff");
+  font-weight: 600;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Blinker-ExtraLight";
+  src: url("assets/fonts/blinker/blinker-extralight-webfont.woff2") format("woff2"),url("assets/fonts/blinker/blinker-extralight-webfont.woff") format("woff");
+  font-weight: 200;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Blinker-ExtraBold";
+  src: url("assets/fonts/blinker/blinker-extrabold-webfont.woff2") format("woff2"),url("assets/fonts/blinker/blinker-extrabold-webfont.woff") format("woff");
+  font-weight: 800;
+  font-display: swap;
+}
+
+@theme {
+  --color-eminence: #673a8a;
+  --color-old-gold: #d3c329;
+  --font-blinker: "Blinker-Regular", "sans-serif";
+  --font-bank-gothic: "Bank-Gothic-Regular", 
+  "sans-serif";
+  --font-blinker-thin: "Blinker-Thin", "sans serif";
+  --font-blinker-extralight: "Blinker-Extra Light", "sans serif";
+  --font-blinker-light: "Blinker-Light", "sans serif";
+  --font-blinker-semibold: "Blinker-SemiBold", "sans serif";
+  --font-blinker-bold: "Blinker-Bold", "sans serif";
+  --font-blinker-extrabold: "Blinker-ExtraBold", "sans serif";
+  --font-blinker-black: "Blinker-Black", "sans serif";
+  --font-bank-gothic-light: "Bank-Gothic-Light", "sans serif";
+  --font-bank-gothic-bold: "Bank-Gothic-Bold", "sans serif";
+}

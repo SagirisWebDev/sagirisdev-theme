@@ -1,0 +1,44 @@
+{
+  "name": "sagirisdev",
+  "version": "1.0.0",
+  "description": "dependencies for Sagirs Web Development Wordpess",
+  "main": "index.js",
+  "scripts": {
+    "sass-watch": "sass --watch ./assets/scss/style.scss:style.css",
+    "sass": "npx sass ./assets/scss/style.scss:style.css",
+    "build": "webpack",
+    "watch": "webpack --watch",
+    "style": "npx @tailwindcss/cli -i ./assets/css/main.css -o ./style.css",
+    "style-watch": "npx @tailwindcss/cli -i ./assets/css/main.css -o ./style.css --watch"
+  },
+  "author": "Sagiris Web Development © 2023",
+  "license": "ISC",
+  "dependencies": {
+    "@tailwindcss/cli": "^4.1.11",
+    "@tailwindcss/forms": "^0.5.10",
+    "autoprefixer": "^10.4.2",
+    "bootstrap": "^5.3.7",
+    "flowbite": "^3.1.2",
+    "postcss-cli": "^9.1.0",
+    "tailwindcss": "^4.1.11",
+    "three": "^0.178.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.28.0",
+    "@babel/preset-env": "^7.28.0",
+    "babel-loader": "^10.0.0",
+    "css-loader": "^6.7.3",
+    "css-minimizer-webpack-plugin": "^4.2.2",
+    "glslify": "^7.1.1",
+    "glslify-loader": "^2.0.0",
+    "html-webpack-plugin": "^5.6.3",
+    "mini-css-extract-plugin": "^2.7.2",
+    "sass": "^1.89.2",
+    "sass-loader": "^16.0.5",
+    "sass-migrator": "^2.3.3",
+    "style-loader": "^4.0.0",
+    "terser-webpack-plugin": "^5.3.14",
+    "webpack": "^5.75.0",
+    "webpack-cli": "^5.0.1"
+  }
+}
