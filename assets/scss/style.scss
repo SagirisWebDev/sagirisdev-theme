@@ -1,0 +1,358 @@
+/*
+Theme Name: Sagiris Web Development
+Author: Sagiris Web Development
+Author URI: https://sagirisdev.ca
+Description: Copyright Sagiris Web Development 2023
+Version: 1.0
+Requires at least: 5.0
+Tested up to: 6.1.1
+Requires PHP: 7.0
+Text Domain: sagirisdev
+*/
+
+@use "sass:map";
+@use "./bootstrap";
+
+/* 
+ * Fonts
+*/
+@font-face {
+  font-family: "Bank Gothic Regular";
+  src: url("../../fonts/bank-gothic/bank_gothic_medium_bt-webfont.woff2"), url("../../fonts/bank-gothic/bank_gothic_medium_bt--webfont.woff");
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "Blinker Regular";
+  src: url("../../fonts/blinker/blinker-regular-webfont.woff2"),url("../../fonts/blinker/blinker-regular-webfont.woff");
+  font-weight: 400;
+}
+@font-face {
+  font-family: "Bank Gothic Light";
+  src: url("../../fonts/bank-gothic/bank_gothic_light_regular-webfont.woff2"), url("../../fonts/bank-gothic/bank_gothic_light_regular-webfont.woff");
+  font-weight: 300;
+}
+@font-face {
+  font-family: "Bank Gothic Bold";
+  src: url("../../fonts/bank-gothic/bank_gothic_bold-webfont.woff2"),url("../../fonts/bank-gothic/bank_gothic_bold-webfont.woff");
+  font-weight: 700;
+}
+@font-face {
+  font-family: "Blinker-Light";
+  src: url("../../fonts/blinker/blinker-light-webfont.woff2"),url("../../fonts/blinker/blinker-light-webfont.woff");
+  font-weight: 300;
+}
+@font-face {
+  font-family: "Blinker-Thin";
+  src: url("../../fonts/blinker/blinker-thin-webfont.woff2"),url("../../fonts/blinker/blinker-thin-webfont.woff");
+  font-weight: 100;
+}
+@font-face {
+  font-family: "Blinker-Bold";
+  src: url("../../fonts/blinker/blinker-bold-webfont.woff2"),url("../../fonts/blinker/blinker-bold-webfont.woff");
+  font-weight: 700;
+}
+@font-face {
+  font-family: "Blinker-Black";
+  src: url("../../fonts/blinker/blinker-black-webfont.woff2"),url("../../fonts/blinker/blinker-black-webfont.woff");
+  font-weight: 900;
+}
+@font-face {
+  font-family: "Blinker-SemiBold";
+  src: url("../../fonts/blinker/blinker-semibold-webfont.woff2"),url("../../fonts/blinker/blinker-semibold-webfont.woff");
+  font-weight: 600;
+}
+@font-face {
+  font-family: "Blinker-ExtraLight";
+  src: url("../../fonts/blinker/blinker-extralight-webfont.woff2"),url("../../fonts/blinker/blinker-extralight-webfont.woff");
+  font-weight: 200;
+}
+@font-face {
+  font-family: "Blinker-ExtraBold";
+  src: url("../../fonts/blinker/blinker-extrabold-webfont.woff2"),url("../../fonts/blinker/blinker-extrabold-webfont.woff");
+  font-weight: 800;
+}
+
+/* 
+ * Defaults
+*/
+* {
+  box-sizing: border-box;
+  color: #cccccc;
+  margin: 0;
+  font-family: 'Blinker', serif;
+  font-size: 1rem;
+  font-weight: 200;
+}
+
+/* 
+ * Fonts
+*/
+.font-light {
+  font-family: 'Blinker-Light';
+}
+
+.font-bold {
+  font-family: 'Blinker-Bold';
+
+}
+/*
+ * Navbar
+*/
+.navbar {
+  background: linear-gradient(to top, #000 0%, #000 100%)
+}
+
+.navbar-toggler {
+  inline-size: 100%;
+
+  &:focus {
+    box-shadow: none;
+  }
+  .navbar-toggler-icon {
+    background-image: url('./assets/img/menu-toggle-icon-white.svg');
+    background-size: cover;
+    width: 20%;
+    height: 1.8em;
+  }
+}
+
+.nav-item {
+  height: 3.1em;
+  letter-spacing: 1px;
+}
+
+.navbar-nav {
+  max-width: 1140px;
+}
+/* 
+ * Front Page
+*/
+// .landing-page-logo
+.logo {
+  top: -30%;
+  left: 8%;
+  animation: fadeIn 4s .5s 1 normal;
+  // opacity: 0%;
+  width: 85vw;
+  max-width: 700px;
+  margin-block-start: 20vh;
+}
+
+.sagiris,
+.web-development {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.sagiris {
+  width: 100%;
+  margin-bottom: 0.35vh;
+}
+
+.web-development {
+  width: 40%;
+}
+
+.home {
+
+  .home-menu {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    animation: fadeIn 4s 1.5s 1 normal;
+    margin-top: 35vh;
+    opacity: 0%;
+
+    a {
+      display: inline-block;
+      text-decoration: none;
+      color: #cccccc;
+      font-family: 'Blinker-Bold';
+      letter-spacing: 1.5px;
+      width: 100%;
+      @include font-size(2rem);
+    }
+  }
+}
+.keep-visible {
+  opacity: 100%
+}
+/* Landing Page Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 100%;
+  }
+}
+
+/* 
+ * Portfolio Page
+*/
+.portfolio-site-wrapper {
+  width: fit-content;
+
+  .portfolio-site-title {
+
+    a {
+      // position: relative;
+      color: #cccccc;
+      z-index: 1;
+      display: none;
+      font-size: 1.5rem;
+      left: 6px;
+    }
+  }
+  
+  &:hover .portfolio-site-title > a {
+      display: block;
+  }
+
+  .portfolio-site-image-wrapper {
+    width: fit-content;
+  }
+
+    .portfolio-image-overlay {
+      position: absolute;
+      top: 0;
+      left: 12px;
+      width: 300px;
+      height: 188px;
+      display: none;
+    }
+
+    &:hover {
+
+      .portfolio-image-overlay {
+        display: block;
+        background: rgba(0, 0, 0, .6);
+      }      
+    }
+  }
+
+/*
+ * Single Site
+*/
+
+.wp-block-post-featured-image {
+  max-width: 972px;
+}
+
+.post-site-link {
+
+  a {
+    font-size: inherit;
+    text-decoration: none;
+    color: white;
+
+    &:hover {
+      color: $gold;
+    }
+  }
+
+}
+
+.accordion {
+  --bs-accordion-bg: rgba(255, 255, 255, 0.2);
+  --bs-accordion-border-color: #5427aa;
+
+  .accordion-button {
+    color: #ffffff;
+    font-size: 1.25rem;
+    font-weight: 700;
+    
+    &:not(.collapsed) {
+        background-color: transparent;
+    }
+
+  }
+
+  .post-details {
+    color: #ffffff;
+  }
+}
+
+/* 
+ * Contact Page
+*/
+
+%FormInputFormatting{
+  border-radius: 5px;
+  font-size: 1.3rem;
+
+  &::placeholder {
+    color: #ffffff;
+  }
+}
+.forminator-ui {
+  margin-block: 1rem;
+  background-color: rgba(255,255,255,0.6);
+  border-radius: 30px;
+  height: 49rem;
+  padding: 1em;
+}
+.forminator-label,
+.forminator-input,
+.forminator-textarea {
+  width: 100%;
+  max-width: 720px;
+  @extend %FormInputFormatting;
+}
+
+.forminator-button {
+  width: 150px;
+  color:#000000;
+  margin-inline: auto;
+  @extend %FormInputFormatting;
+  background-color: rgba($color: #cccccc, $alpha: 1.0);
+}
+
+.forminator-row-last {
+  text-align: center;
+}
+
+/*
+ * About Page
+*/
+.page-id-19 {
+
+  .about-intro {
+    font-family: 'Blinker-Light';
+  }
+  em {
+    font-size: inherit;
+  }
+
+  .wp-block-button {
+
+    a {
+      text-decoration: none;
+      color: white;
+      background: $purple;
+      @include font-size(1.75rem);
+
+      &:hover,
+      &:focus {
+        border: 2px solid $gold;
+      }
+    }
+  }
+}
+/*
+ * Footer
+*/
+footer {
+  width: 100vw;
+  height: 5vh;
+  padding: 0.5rem;
+  border-top: solid 1px white;
+  text-align: center;
+}
+
+.footer-text {
+  font-size: 1.125rem;
+}

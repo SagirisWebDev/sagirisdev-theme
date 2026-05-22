@@ -1,0 +1,13 @@
+$purple:  #5427aa;
+$gold:  #dbc149;
+$black: #000000;
+$content: #ffffff;
+$gold-gradient: radial-gradient($gold -125%, transparent, $gold 165%);
+$purple-gradient: radial-gradient($purple -155%, transparent, $purple 135%);
+$gold-purple-gradient: linear-gradient($gold, $purple);
+$accordion-icon-color: #ffffff;
+$accordion-icon-active-color: $gold;
+$enable-negative-margins: true;
+$theme-colors: (
+  "black": $black,
+);

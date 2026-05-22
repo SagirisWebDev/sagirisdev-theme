@@ -1,0 +1,14 @@
+@import "./assets/css/utilities.css";
+
+.editor-styles-wrapper {
+  background-image: url('/wp-content/uploads/2025/09/black-sand.webp')
+}
+
+.is-root-container {
+  background-color: rgba(255, 255, 255, 0.25);
+  border-radius: 15px;
+}
+
+.wp-block-post-title {
+  color: white;
+}

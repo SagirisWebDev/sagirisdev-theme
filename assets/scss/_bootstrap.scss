@@ -1,0 +1,22 @@
+@use "sass:map";
+
+$purple:  #5427aa;
+$gold:  #dbc149;
+$black: #000000;
+$content: #ffffff;
+$gold-gradient: radial-gradient($gold -125%, transparent, $gold 165%);
+$purple-gradient: radial-gradient($purple -155%, transparent, $purple 135%);
+$gold-purple-gradient: linear-gradient($gold, $purple);
+$accordion-icon-color: #ffffff;
+$accordion-icon-active-color: $gold;
+$enable-negative-margins: true;
+$theme-colors: (
+  "black": $black,
+);
+
+@use "../../node_modules/bootstrap/scss/bootstrap" with (
+  $theme-colors: $theme-colors,
+  $enable-negative-margins: $enable-negative-margins,
+  $accordion-icon-color: $accordion-icon-color,
+  $accordion-icon-active-color: $accordion-icon-active-color,
+)

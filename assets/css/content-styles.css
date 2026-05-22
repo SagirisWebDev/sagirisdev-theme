@@ -1,0 +1,100 @@
+/* --------- Baseline Styles -------- */
+
+body {
+  @apply font-blinker leading-[1.6] text-gray-100
+}
+
+h1, h2 {
+  @apply font-bank-gothic-bold my-6
+}
+
+h3, h4 {
+  @apply font-bank-gothic my-6
+}
+
+h1 {
+  @apply text-h1
+}
+
+h2 {
+  @apply text-h2
+}
+
+h3 {
+  @apply text-h3
+}
+
+h4 {
+  @apply text-h4
+}
+
+.wp-block-group p,
+.wp-block-group li {
+  @apply text-[1.15rem] tracking-wide
+}
+
+.wp-block-group p {
+  @apply my-6
+}
+
+.wp-block-group ul {
+  @apply list-disc list-inside
+}
+
+.wp-block-group {
+  @apply w-full items-start
+}
+
+.cont-wrap {
+  @apply max-w-[70ch] p-4
+}
+
+.wp-block-post-featured-image {
+  @apply p-4
+}
+
+
+
+
+/* ----------- Component Styles ---------- */
+
+/* Buttons */
+.wp-block-button {
+  @apply relative py-1 px-1 my-6 max-w-fit rounded-full focus-within:outline-4 focus-within:outline-cyan-400;
+}
+
+.wp-block-button span {
+  @apply absolute bottom-0 left-0 w-0 h-1 bg-eminence duration-300 ease-in-out group-hover:w-full group-hover:transition-all;
+}
+
+.wp-block-button a {
+  @apply relative w-full text-center bg-gray-600 text-gray-100 transition-all group-hover:text-white group-hover:bg-transparent group-hover:font-bold
+}
+
+/* Links */
+.wp-block-safe-svg-svg-icon svg {
+  @apply hover:scale-125 hover:fill-old-gold transition-all duration-300
+}
+
+/* Carousel */
+.swiper img {
+  @apply mx-auto
+}
+
+.cb-wrapper {
+  @apply items-center
+}
+
+.wp-block-cb-carousel-v2 .cb-button-prev,
+.wp-block-cb-carousel-v2 .cb-button-next {
+  @apply text-gray-100 w-5
+}
+
+
+
+/* ------------- Decorative Styles --------------- */
+
+/* Heading Underline */
+.heading-underline {
+  @apply max-w-96 border-b-3 border-gray-100 pb-3 ps-3
+}
