@@ -1,2 +1,3 @@
 node_modules
 .swd-harness
+.DS_Store

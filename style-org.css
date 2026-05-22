@@ -1,0 +1,170 @@
+/*
+Theme Name: Sagiris Web Development
+Author: Sagiris Web Development
+Author URI: https://sagirisdev.ca
+Description: Copyright Sagiris Web Development 2023
+Version: 1.0
+Requires at least: 5.0
+Tested up to: 6.1.1
+Requires PHP: 7.0
+Text Domain: sagirisdev
+*/
+* {
+  box-sizing: border-box;
+  color: rgba(255, 255, 255, 0.75);
+  margin: 0;
+}
+
+.container-fluid {
+  width: 100%;
+  display: inherit;
+}
+
+.navbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 0 0.25rem 0;
+  height: 8vh;
+  background: url("assets/img/Asset-3.svg") repeat-x;
+}
+
+#navbar-container {
+  display: flex;
+  flex-wrap: inherit;
+  align-items: center;
+  justify-items: center;
+  height: 100%;
+  width: 100vw;
+}
+
+.navbar-toggler {
+  z-index: 6;
+  width: 40vw;
+  font-size: 2rem;
+  line-height: 1;
+  background-color: transparent;
+  transition: box-shadow 0.15s ease-in-out;
+  margin: auto;
+  margin-top: 1vh;
+  border: none;
+}
+
+#navbarNavAltMarkup {
+  z-index: 5;
+  opacity: 0;
+  justify-content: center;
+  flex-basis: 100%;
+  flex-grow: 1;
+  align-items: center;
+  transform: translateY(-3rem);
+  transition: all 0.1s ease-out;
+  margin-top: 0.9rem;
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+#navbarNavAltMarkup[data-visible=true] {
+  opacity: 1;
+  transform: translateY(0);
+  transition: all 0.3s ease-out;
+}
+
+.navbar-nav {
+  display: flex;
+  flex-direction: column;
+  padding-left: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+  overflow-wrap: break-word;
+  list-style: none;
+}
+
+.nav-link {
+  display: block;
+  padding: 0.5rem 0;
+  text-decoration: none;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+  text-align: center;
+}
+
+.nav-link:hover {
+  color: #5427aa;
+}
+
+.navbar-gradient {
+  background: url("assets/img/Asset-3.svg") repeat-x;
+}
+
+.landing-page-logo {
+  margin-top: 22vh;
+}
+
+.sagiris,
+.web-development {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.sagiris {
+  width: 85vw;
+  margin-bottom: 0.35vh;
+}
+
+.web-development {
+  width: 40vw;
+}
+
+#footer-container {
+  position: absolute;
+  bottom: 0;
+  width: 100vw;
+  height: 5vh;
+  padding: 0.5rem;
+  border-top: solid 1px white;
+  text-align: center;
+}
+
+.footer-text {
+  font-size: 1.125rem;
+}
+
+@media screen and (min-width: 375px) {
+  .navbar-toggler {
+    display: none;
+  }
+
+  #navbarNavAltMarkup {
+    opacity: 1;
+    height: 100%;
+    margin-top: 6.9vh;
+    background-color: transparent;
+  }
+
+  .navbar-nav {
+    flex-direction: row;
+    margin-top: 1.5vh;
+  }
+
+  .menu-item {
+    width: 25%;
+  }
+}
+@media screen and (min-width: 511px) {
+  .sagiris {
+    width: 27rem;
+  }
+
+  .web-development {
+    width: 12.75rem;
+  }
+}
+@media screen and (min-width: 1140px) {
+  #navbar-container {
+    width: 71.25rem;
+    margin: auto;
+  }
+}
+
+/*# sourceMappingURL=style.css.map */
