@@ -1,3 +1,22 @@
 node_modules
 .swd-harness
+.claude/
 .DS_Store
+.playwright-mcp/
+
+# Build artifacts
+*.css.map
+
+# Backup files
+*_bk.php
+*-bk.php
+*-org.*
+
+# Browser-testing screenshots at the repo root (keep screenshot.png — that's the WP admin thumbnail)
+/desktop-*.png
+/mobile-*.png
+/vw-*.png
+/fp-*.png
+/portfolio-*.png
+/sample-*.png
+/post-bg-*.png

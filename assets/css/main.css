@@ -1,3 +1,14 @@
+/*!
+Theme Name: Sagiris Web Development
+Author: Sagiris Web Development
+Author URI: https://sagirisdev.ca
+Description: Custom WordPress theme for Sagiris Web Development, built with Tailwind CSS v4 and a WebGL hero animation.
+Version: 1.0
+Requires at least: 5.0
+Tested up to: 6.1.1
+Requires PHP: 7.0
+Text Domain: sagirisdev
+*/
 @import "tailwindcss";
 @import "./content-styles.css";
 
@@ -8,7 +19,7 @@
 
 @font-face {
   font-family: "Bank-Gothic-Regular";
-  src: url("assets/fonts/bank-gothic/bank_gothic_medium_bt-webfont.woff2") format("woff2"), url("assets/fonts/bank-gothic/bank_gothic_medium_bt--webfont.woff") format("woff");
+  src: url("assets/fonts/bank-gothic/bank_gothic_medium_bt-webfont.woff2") format("woff2"), url("assets/fonts/bank-gothic/bank_gothic_medium_bt-webfont.woff") format("woff");
   font-weight: 400;
   font-display: swap;
 }
@@ -45,11 +56,16 @@
   --breakpoint-nav: 48rem;
   --breakpoint-md: 53.75rem;
   --breakpoint-xl2xl: 88.125rem;
+  --breakpoint-cap: 95.9375rem;
   --breakpoint-3xl: 114.75rem;
   --container-content-max: 74.375rem;
 }
 
 /* -------------- Custom CSS --------------- */
+html {
+  overflow-x: clip;
+}
+
 @media (width >= 48rem) and (width < 53.75rem) {
   #navbar-default {
     padding-block: 1rem;
@@ -58,10 +74,31 @@
 
 html {
   background-color: #000;
-  background-image: url(assets/img/black-sand.webp);
+  background-image: url(assets/img/black-sand-1.webp);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center top;
+  background-attachment: fixed;
+}
+
+/* Front page: paint the bg via a fixed pseudo-element so it stays
+   viewport-centered regardless of html's overflow:clip context. */
+html:has(body.home) {
+  background-image: none;
+}
+body.home::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #000;
+  background-image: url(assets/img/black-sand-1.webp);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center top;
+  z-index: -1;
+  pointer-events: none;
 }
 
 body.home footer {

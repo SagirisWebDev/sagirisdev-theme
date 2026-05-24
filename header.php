@@ -16,13 +16,13 @@
   <script src="<?php echo $theme_uri; ?>/assets/js/dist/emblem.bundle.js" defer></script>
   <?php endif; ?>
 </head>
-<body <?php body_class(['relative w-screen max-w-[1550px] mx-auto']);?>>
+<body <?php body_class(['relative w-screen max-w-[1535px] mx-auto! overflow-x-clip']);?>>
   <?php
     if ( function_exists( 'wp_body_open' ) ) {
       wp_body_open();
     }
     ?>
-  <header class="relative w-full md:w-[98vw] md:px-3 mx-auto top-0 flex flex-wrap sm:justify-start sm:flex-nowrap bg-transparent text-sm py-3">
+  <header class="relative w-full md:w-[98vw] md:px-3 mx-auto cap:max-w-[1535px] cap:mx-auto top-0 flex flex-wrap sm:justify-start sm:flex-nowrap bg-transparent text-sm py-3">
     <nav class="w-full flex flex-wrap items-center <?php echo esc_attr(!is_front_page() ?  "justify-between" : "justify-end"); ?>">
       <?php
       if (!is_front_page()) { 

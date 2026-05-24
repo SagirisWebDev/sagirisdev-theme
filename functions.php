@@ -1,6 +1,4 @@
 <?php
-require_once get_template_directory() . '/inc/classes/class-wp-bootstrap-navwalker.php';
-
 //  Theme Features
 function sagirisdev_theme_support(){
 
@@ -32,11 +30,22 @@ add_filter( 'nav_menu_link_attributes', 'add_styles_nav_menu', 10, 3 );
 
 // Enqueue Styles and Scripts
 function sagirisdev_register_styles_scripts() {
-  $version = wp_get_theme()-> get('Version');
+  $version = wp_get_theme()->get('Version');
+  $theme_uri = get_template_directory_uri();
 
-  wp_enqueue_style('sagirisdev-style', get_template_directory_uri() . '/style.css', array(), $version, 'all');
+  wp_enqueue_style('sagirisdev-style', $theme_uri . '/style.css', array(), $version, 'all');
 
-  /* Three js animation preloaded on front page in header.php */
+  // Small UI utilities (self-init, no dependencies). Enqueued in footer so
+  // they run after the DOM exists, matching their former placement as inline
+  // scripts at the end of footer.php.
+  wp_enqueue_script('sagirisdev-nav-toggle', $theme_uri . '/assets/js/ui/nav-toggle.js', array(), $version, true);
+  wp_enqueue_script('sagirisdev-tabs', $theme_uri . '/assets/js/ui/tabs.js', array(), $version, true);
+
+  if (is_front_page()) {
+    wp_enqueue_script('sagirisdev-fp-height-sync', $theme_uri . '/assets/js/ui/fp-height-sync.js', array(), $version, true);
+  }
+
+  /* WebGL emblem bundle preloaded on front page in header.php */
 }
 
 add_action('wp_enqueue_scripts', 'sagirisdev_register_styles_scripts');

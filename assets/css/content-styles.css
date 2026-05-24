@@ -98,3 +98,8 @@ h4 {
 .heading-underline {
   @apply max-w-96 border-b-3 border-gray-100 pb-3 ps-3
 }
+
+/* Forminator submit button — override plugin's transparent background */
+.forminator-button.forminator-button-submit {
+  background-color: #fff !important;
+}
