@@ -1,5 +1,5 @@
 <?php get_header(); ?>
-
+<main class="relative max-w-[1350px] mx-auto mt-8">
 <div class="container-sm mb-5">
   <h1 class="font-bank-gothic text-4xl rounded-1 text-gray-300 max-w-96 border-b-3 border-gray-100 pb-3 ps-3 mx-6 mb-8"><?php the_title(); ?></h1>
   <div class="flex flex-wrap justify-start w-full md:ms-5 p-5">
@@ -16,7 +16,7 @@
     </ul>
 
     <div id="default-styled-tab-content" class="font-blinker flex flex-wrap w-fit max-w-[1200px] text-lg text-gray-100 xl:border-s-2 border-gray-100 md:p-5">
-    <div class="hidden" id="styled-sites" role="tabpanel" aria-labelledby="sites-tab">
+    <div id="styled-sites" role="tabpanel" aria-labelledby="sites-tab">
       <div class="wp-row flex flex-wrap justify-center items-center gap-0.5">
         <div class="wp-query-loop">
           <ul class="wp-post-template flex flex-wrap justify-start gap-8">

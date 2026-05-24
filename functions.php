@@ -34,17 +34,7 @@ add_filter( 'nav_menu_link_attributes', 'add_styles_nav_menu', 10, 3 );
 function sagirisdev_register_styles_scripts() {
   $version = wp_get_theme()-> get('Version');
 
-  // style.css
   wp_enqueue_style('sagirisdev-style', get_template_directory_uri() . '/style.css', array(), $version, 'all');
-
-  // index.js
-  wp_enqueue_script('sagirisdev-index', get_template_directory_uri(). '/assets/js/index.js', array(), '1.0', true);
-
-  // flowbite css
-  wp_enqueue_style('flowbite', 'https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.css', array(), '3.1.2', 'all');
-
-  // flowbite js
-  wp_enqueue_script('flowbite', 'https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js', [], '3.1.2', true);
 
   /* Three js animation preloaded on front page in header.php */
 }

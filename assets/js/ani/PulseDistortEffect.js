@@ -1,4 +1,17 @@
-import * as THREE from "../../../node_modules/three/build/three.module.js";
+import {
+  Vector2,
+  Vector3,
+  Scene,
+  OrthographicCamera,
+  WebGLRenderer,
+  Raycaster,
+  TextureLoader,
+  LinearFilter,
+  MeshBasicMaterial,
+  PlaneGeometry,
+  Mesh,
+  ShaderMaterial,
+} from 'three';
 
 export default class PulseDistortEffect {
   constructor({
@@ -38,28 +51,28 @@ export default class PulseDistortEffect {
     this.showDistortedDebug = showDistortedDebug;
     this.showPulseOverlayMask = showPulseOverlayMask;
 
-    this.mouse = new THREE.Vector2(0.5, 0.5);
-    this.scene = new THREE.Scene();
-    this.camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 10);
+    this.mouse = new Vector2(0.5, 0.5);
+    this.scene = new Scene();
+    this.camera = new OrthographicCamera(-1, 1, 1, -1, 0, 10);
     this.camera.position.z = 1;
-    this.renderer = new THREE.WebGLRenderer({ canvas, alpha: true });
+    this.renderer = new WebGLRenderer({ canvas, alpha: true });
     this.renderer.setPixelRatio(window.devicePixelRatio);
     this.renderer.setSize(window.innerWidth, window.innerHeight);
-    this.raycaster = new THREE.Raycaster();
-    this.mouseNDC = new THREE.Vector2();
+    this.raycaster = new Raycaster();
+    this.mouseNDC = new Vector2();
     this.uniforms = {
       uTexture: { value: null },
       uTextureBase: { value: null },
       uMask: { value: null },
       uPulseMask: { value: null },
       uPulseOverlayMask: { value: null },
-      uMaskOffset: { value: new THREE.Vector2(this.maskOffsetX, this.maskOffsetY) },
-      uMaskScale: { value: new THREE.Vector2(1 / this.overlayScale, 1 / this.overlayScale) },
+      uMaskOffset: { value: new Vector2(this.maskOffsetX, this.maskOffsetY) },
+      uMaskScale: { value: new Vector2(1 / this.overlayScale, 1 / this.overlayScale) },
       uMouse: { value: this.mouse },
       uTime: { value: 0 },
-      uPulseUV: { value: new THREE.Vector2(this.maskOffsetX, -(this.maskOffsetY)) },
+      uPulseUV: { value: new Vector2(this.maskOffsetX, -(this.maskOffsetY)) },
       uPulseStartTime: { value: -1.0 },
-      uGoldLocal: { value: new THREE.Vector2(0.0, 0.07) },
+      uGoldLocal: { value: new Vector2(0.0, 0.07) },
     };
 
     this.animate = this.animate.bind(this);
@@ -68,7 +81,7 @@ export default class PulseDistortEffect {
     window.addEventListener("touchstart", (e) => this.onTouchStart(e), { passive: false });
     window.addEventListener("touchmove", (e) => this.onTouchMove(e), { passive: false });
     this.onClick = this.onClick.bind(this);
-    this.renderer.domElement.addEventListener('click', this.onClick);
+    window.addEventListener('click', this.onClick);
   }
 
   async init() {
@@ -79,32 +92,28 @@ export default class PulseDistortEffect {
   }
 
   loadTextures() {
-    const loader = new THREE.TextureLoader();
+    const loader = new TextureLoader();
     return Promise.all([
       loader.loadAsync(this.textureDistortedPath),
-      loader.loadAsync(this.textureDistortedPath), // base texture
       loader.loadAsync(this.textureMaskPath),
       loader.loadAsync(this.texturePulseMaskPath),
       loader.loadAsync(this.texturePulseOverlayMaskPath),
       loader.loadAsync(this.textureOverlayPath)
-    ]).then(([distorted, base, mask, pulseMask, pulseOverlayMask, overlay]) => {
+    ]).then(([distorted, mask, pulseMask, pulseOverlayMask, overlay]) => {
       this.textureDistorted = distorted;
-      this.textureDistorted.minFilter = THREE.LinearFilter;
-      this.textureDistorted.magFilter = THREE.LinearFilter;
+      this.textureDistorted.minFilter = LinearFilter;
+      this.textureDistorted.magFilter = LinearFilter;
       this.textureDistorted.anisotropy = this.renderer.capabilities.getMaxAnisotropy();
-      this.textureBase = base;
-      this.textureBase.minFilter = THREE.LinearFilter;
-      this.textureBase.magFilter = THREE.LinearFilter;
-      this.textureBase.anisotropy = this.renderer.capabilities.getMaxAnisotropy();
+      this.textureBase = distorted;
       this.textureMask = mask;
       this.texturePulseMask = pulseMask;
       this.texturePulseOverlayMask = pulseOverlayMask;
       this.textureOverlay = overlay;
-      this.textureOverlay.minFilter = THREE.LinearFilter;
-      this.textureOverlay.magFilter = THREE.LinearFilter;
+      this.textureOverlay.minFilter = LinearFilter;
+      this.textureOverlay.magFilter = LinearFilter;
       this.textureOverlay.anisotropy = this.renderer.capabilities.getMaxAnisotropy();
       this.uniforms.uTexture.value = distorted;
-      this.uniforms.uTextureBase.value = base;
+      this.uniforms.uTextureBase.value = distorted;
       this.uniforms.uMask.value = mask;
       this.uniforms.uPulseMask.value = pulseMask;
       this.uniforms.uPulseOverlayMask.value = pulseOverlayMask;
@@ -112,15 +121,15 @@ export default class PulseDistortEffect {
   }
 
   createOverlay() {
-    const overlayMat = new THREE.MeshBasicMaterial({
+    const overlayMat = new MeshBasicMaterial({
       map: this.textureOverlay,
       transparent: true,
       depthTest: false,
       alphaTest: 0.05
     });
-    const overlayGeo = new THREE.PlaneGeometry(2, 2);
+    const overlayGeo = new PlaneGeometry(2, 2);
     overlayGeo.translate(0, 0, 0);
-    this.overlayPlane = new THREE.Mesh(overlayGeo, overlayMat); 
+    this.overlayPlane = new Mesh(overlayGeo, overlayMat); 
     this.overlayPlane.renderOrder = 8; // ensure it renders last
     this.updateOverlayScale();
     this.scene.add(this.overlayPlane);
@@ -128,9 +137,9 @@ export default class PulseDistortEffect {
   }
 
   createPlanes() {
-    const geometry = new THREE.PlaneGeometry(2, 2);
+    const geometry = new PlaneGeometry(2, 2);
 
-    const createShaderMat = (frag) => new THREE.ShaderMaterial({
+    const createShaderMat = (frag) => new ShaderMaterial({
       uniforms: this.uniforms,
       transparent: true,
       vertexShader: `
@@ -143,7 +152,7 @@ export default class PulseDistortEffect {
     });
 
     const addPlane = (mat, order) => {
-      const plane = new THREE.Mesh(geometry.clone(), mat);
+      const plane = new Mesh(geometry.clone(), mat);
       plane.renderOrder = order;
       this.scene.add(plane);
       return plane;
@@ -367,15 +376,15 @@ export default class PulseDistortEffect {
 
   updateMaskOffset() {
     this.overlayPlane.updateMatrixWorld(true);
-    const overlayWorld = new THREE.Vector3();
+    const overlayWorld = new Vector3();
     overlayWorld.setFromMatrixPosition(this.overlayPlane.matrixWorld);
     overlayWorld.project(this.camera);
-    const overlayCenterUV = new THREE.Vector2(overlayWorld.x * 0.5 + 0.5, overlayWorld.y * 0.5 + 0.5);
-    const uv = new THREE.Vector2(
+    const overlayCenterUV = new Vector2(overlayWorld.x * 0.5 + 0.5, overlayWorld.y * 0.5 + 0.5);
+    const uv = new Vector2(
       0.5 + this.maskOffsetX,
       0.5 + this.maskOffsetY
     );
-    this.uniforms.uMaskOffset.value.copy(uv.sub(new THREE.Vector2(0.5, 0.5)));
+    this.uniforms.uMaskOffset.value.copy(uv.sub(new Vector2(0.5, 0.5)));
   }
 
   setAspectRatio(width = window.innerWidth, height = window.innerHeight, ratio = 4/3) {
@@ -407,7 +416,7 @@ export default class PulseDistortEffect {
   }
   onClick(e) {
     const rect = this.renderer.domElement.getBoundingClientRect();
-    const ndc = new THREE.Vector2(
+    const ndc = new Vector2(
       ((e.clientX - rect.left) / rect.width) * 2 - 1,
       -(((e.clientY - rect.top) / rect.height) * 2 - 1)
     );
@@ -418,7 +427,7 @@ export default class PulseDistortEffect {
 
     // 1) validate click is near the gold diamond in overlay-local UV
     const clickUV  = hits[0].uv;                    // 0..1 on overlay quad
-    const diamondUVLocal = new THREE.Vector2(0.5, 0.535);
+    const diamondUVLocal = new Vector2(0.5, 0.535);
     const threshold = 0.08;                         // tweak if needed
     if (clickUV.distanceTo(diamondUVLocal) > threshold) return;
 
@@ -449,9 +458,9 @@ export default class PulseDistortEffect {
     const x = (e.touches[0].clientX - rect.left) / rect.width;
     const y = 1.0 - (e.touches[0].clientY - rect.top) / rect.height;
   
-    const goldUV = new THREE.Vector2(0.5, 0.535);
+    const goldUV = new Vector2(0.5, 0.535);
     const goldScreen = this.getPulseUVFromPlaneUV(this.overlayPlane, goldUV, this.camera);
-    const dist = goldScreen.distanceTo(new THREE.Vector2(x, y));
+    const dist = goldScreen.distanceTo(new Vector2(x, y));
   
     if (dist < 0.05) {
       this.uniforms.uPulseStartTime.value = this.uniforms.uTime.value;
@@ -462,7 +471,7 @@ export default class PulseDistortEffect {
   animate() {
     requestAnimationFrame(this.animate);
     this.uniforms.uTime.value = performance.now() / 1000;
-    const goldUV = new THREE.Vector2(0.485, 0.475);
+    const goldUV = new Vector2(0.485, 0.475);
     this.renderer.render(this.scene, this.camera);
   }
 
@@ -470,21 +479,21 @@ export default class PulseDistortEffect {
     const posAttr = plane.geometry.attributes.position;
     const uvAttr = plane.geometry.attributes.uv;
     const i = [0, 1, 2];
-    const uvA = new THREE.Vector2().fromBufferAttribute(uvAttr, i[0]);
-    const uvB = new THREE.Vector2().fromBufferAttribute(uvAttr, i[1]);
-    const uvC = new THREE.Vector2().fromBufferAttribute(uvAttr, i[2]);
-    const a = new THREE.Vector3().fromBufferAttribute(posAttr, i[0]);
-    const b = new THREE.Vector3().fromBufferAttribute(posAttr, i[1]);
-    const c = new THREE.Vector3().fromBufferAttribute(posAttr, i[2]);
+    const uvA = new Vector2().fromBufferAttribute(uvAttr, i[0]);
+    const uvB = new Vector2().fromBufferAttribute(uvAttr, i[1]);
+    const uvC = new Vector2().fromBufferAttribute(uvAttr, i[2]);
+    const a = new Vector3().fromBufferAttribute(posAttr, i[0]);
+    const b = new Vector3().fromBufferAttribute(posAttr, i[1]);
+    const c = new Vector3().fromBufferAttribute(posAttr, i[2]);
     const bary = this.getBarycentricWeights(uv, uvA, uvB, uvC);
-    const pos = new THREE.Vector3()
+    const pos = new Vector3()
       .addScaledVector(a, bary.x)
       .addScaledVector(b, bary.y)
       .addScaledVector(c, bary.z);
     plane.updateMatrixWorld();
     pos.applyMatrix4(plane.matrixWorld);
     const ndc = pos.project(camera);
-    return new THREE.Vector2(ndc.x * 0.5 + 0.5, ndc.y * 0.5 + 0.5);
+    return new Vector2(ndc.x * 0.5 + 0.5, ndc.y * 0.5 + 0.5);
   }
 
   getBarycentricWeights(p, a, b, c) {
@@ -499,6 +508,6 @@ export default class PulseDistortEffect {
     const denom = d00 * d11 - d01 * d01;
     const v = (d11 * d20 - d01 * d21) / denom;
     const w = (d00 * d21 - d01 * d20) / denom;
-    return new THREE.Vector3(1 - v - w, v, w);
+    return new Vector3(1 - v - w, v, w);
   }
 }

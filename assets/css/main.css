@@ -12,19 +12,6 @@
   font-weight: 400;
   font-display: swap;
 }
-
-@font-face {
-  font-family: "Blinker-Regular";
-  src: url("assets/fonts/blinker/blinker-regular-webfont.woff2") format("woff2"),url("assets/fonts/blinker/blinker-regular-webfont.woff") format("woff");
-  font-weight: 400;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Bank-Gothic-Light";
-  src: url("assets/fonts/bank-gothic/bank_gothic_light-webfont.woff2") format("woff2"), url("assets/fonts/bank-gothic/bank_gothic_light-webfont.woff") format("woff");
-  font-weight: 300;
-  font-display: swap;
-}
 @font-face {
   font-family: "Bank-Gothic-Bold";
   src: url("assets/fonts/bank-gothic/bank_gothic_bold-webfont.woff2") format("woff2"),url("assets/fonts/bank-gothic/bank_gothic_bold-webfont.woff") format("woff");
@@ -32,27 +19,9 @@
   font-display: swap;
 }
 @font-face {
-  font-family: "Blinker-Light";
-  src: url("assets/fonts/blinker/blinker-light-webfont.woff2") format("woff2"),url("assets/fonts/blinker/blinker-light-webfont.woff") format("woff");
-  font-weight: 300;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Blinker-Thin";
-  src: url("assets/fonts/blinker/blinker-thin-webfont.woff2") format("woff2"),url("assets/fonts/blinker/blinker-thin-webfont.woff") format("woff");
-  font-weight: 100;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Blinker-Bold";
-  src: url("assets/fonts/blinker/blinker-bold-webfont.woff2") format("woff2"),url("assets/fonts/blinker/blinker-bold-webfont.woff") format("woff");
-  font-weight: 700;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Blinker-Black";
-  src: url("assets/fonts/blinker/blinker-black-webfont.woff2") format("woff2"),url("assets/fonts/blinker/blinker-black-webfont.woff") format("woff");
-  font-weight: 900;
+  font-family: "Blinker-Regular";
+  src: url("assets/fonts/blinker/blinker-regular-webfont.woff2") format("woff2"),url("assets/fonts/blinker/blinker-regular-webfont.woff") format("woff");
+  font-weight: 400;
   font-display: swap;
 }
 @font-face {
@@ -61,34 +30,14 @@
   font-weight: 600;
   font-display: swap;
 }
-@font-face {
-  font-family: "Blinker-ExtraLight";
-  src: url("assets/fonts/blinker/blinker-extralight-webfont.woff2") format("woff2"),url("assets/fonts/blinker/blinker-extralight-webfont.woff") format("woff");
-  font-weight: 200;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Blinker-ExtraBold";
-  src: url("assets/fonts/blinker/blinker-extrabold-webfont.woff2") format("woff2"),url("assets/fonts/blinker/blinker-extrabold-webfont.woff") format("woff");
-  font-weight: 800;
-  font-display: swap;
-}
 
 @theme {
   --color-eminence: oklch(0.4413 0.1321 307.85);
   --color-old-gold: oklch(0.8061 0.1596 103);
   --font-blinker: "Blinker-Regular", "sans-serif";
-  --font-bank-gothic: "Bank-Gothic-Regular", 
-  "sans-serif";
-  --font-blinker-thin: "Blinker-Thin", "sans serif";
-  --font-blinker-extralight: "Blinker-Extra Light", "sans serif";
-  --font-blinker-light: "Blinker-Light", "sans serif";
-  --font-blinker-semibold: "Blinker-SemiBold", "sans serif";
-  --font-blinker-bold: "Blinker-Bold", "sans serif";
-  --font-blinker-extrabold: "Blinker-ExtraBold", "sans serif";
-  --font-blinker-black: "Blinker-Black", "sans serif";
-  --font-bank-gothic-light: "Bank-Gothic-Light", "sans serif";
-  --font-bank-gothic-bold: "Bank-Gothic-Bold", "sans serif";
+  --font-blinker-semibold: "Blinker-SemiBold", "sans-serif";
+  --font-bank-gothic: "Bank-Gothic-Regular", "sans-serif";
+  --font-bank-gothic-bold: "Bank-Gothic-Bold", "sans-serif";
   --text-h1: 2.986rem;
   --text-h2: 2.488rem;
   --text-h3: 2.074rem;
@@ -101,10 +50,46 @@
 }
 
 /* -------------- Custom CSS --------------- */
-@media(max-height: 700px) and (min-width: 860px) {
-  .home footer {
-    bottom: -120vh;
+@media (width >= 48rem) and (width < 53.75rem) {
+  #navbar-default {
+    padding-block: 1rem;
   }
+}
+
+html {
+  background-color: #000;
+  background-image: url(assets/img/black-sand.webp);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center top;
+}
+
+body.home footer {
+  position: static;
+}
+
+body.blog,
+body.page:not(.front-page),
+body.error404 {
+  display: flex;
+  flex-direction: column;
+  min-height: 100svh;
+}
+
+body.blog main,
+body.page:not(.front-page) main,
+body.error404 main {
+  flex: 1;
+}
+
+body.blog footer,
+body.page:not(.front-page) footer,
+body.error404 footer {
+  position: static;
+}
+
+.wp-image-1017 {
+  @apply bg-gray-400/50 rounded-lg;
 }
 
 .fp-content {

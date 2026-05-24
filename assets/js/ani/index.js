@@ -53,18 +53,25 @@ const initAni = (confObj) => {
   }
   const ani = new PulseDistortEffect(args);
   ani.init();
+  canvas.style.opacity = '1';
 }
-switch(true) {
-  case window.innerWidth < desktopVW:
-    initAni(mobileConf);
-    break;
-  case window.innerWidth >= desktopVW && window.innerWidth < fourKVW:
-    initAni(desktopConf);
-    break;
-  case window.innerWidth >= fourKVW:
-    initAni(fourKConf);
-    break;
-  default:
-    initAni(mobileConf);
-    break;
+const startAni = () => {
+  switch(true) {
+    case window.innerWidth < desktopVW:
+      initAni(mobileConf);
+      break;
+    case window.innerWidth >= desktopVW && window.innerWidth < fourKVW:
+      initAni(desktopConf);
+      break;
+    case window.innerWidth >= fourKVW:
+      initAni(fourKConf);
+      break;
+    default:
+      initAni(mobileConf);
+      break;
+  }
+};
+
+if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  startAni();
 }

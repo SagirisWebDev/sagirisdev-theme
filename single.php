@@ -4,6 +4,7 @@
 	$prev_link_text = $prev_link === 'portfolio' ? 'Return to Portfolio' : 'Return to Blog';
 	
 ?>
+<main class="relative max-w-[1350px] w-[80%] mx-auto mt-8">
 <div class="wp-block-button group mx-2">
   <span></span>
   <a href="<?php echo site_url($prev_link); ?>" class="wp-block-button__link wp-element-button px-2"><?php esc_html_e($prev_link_text); ?></a>

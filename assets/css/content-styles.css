@@ -46,7 +46,7 @@ h4 {
 }
 
 .cont-wrap {
-  @apply max-w-[70ch] p-4
+  @apply max-w-[60ch] p-4
 }
 
 .wp-block-post-featured-image {

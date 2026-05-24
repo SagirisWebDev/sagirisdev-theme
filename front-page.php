@@ -1,14 +1,15 @@
 <?php get_header(); ?>
+<main class="relative max-w-[1350px] w-[80%] mx-auto mt-8">
 <div class="graphics-wrapper absolute -z-1 left-[0%] top-[-10lvh] 2xl:left-[-10vw]">
   <div class="canvas-wrapper absolute top-[-5lvh] overflow-hidden">
-    <canvas id="canvas" class="h-auto w-full aspect-square object-contain"></canvas>
+    <canvas id="canvas" class="h-auto w-full aspect-square object-contain" style="opacity:0;transition:opacity 1.4s ease;"></canvas>
   </div>
   <div class="logo absolute w-screen md:w-[35vw] xl:w-[39vw] 2xl:w-[42vw] 3xl:w-[45vw] max-w-[620px] md:max-w-[330px] lg:max-w-[380px] xl:max-w-[430px] 2xl:max-w-[450px] 3xl:max-w-[475px] flex flex-col flex-nowrap top-[45svh] sm:left-[calc(5vw+2px)] nav:left-[calc(10vw+2px)] md:left-[calc(11vw+2px)] lg:left-[calc(12vw+2px)] xl:left-[calc(12vw+10px)] xl2xl:left-[calc(14vw+2px)] 2xl:left-[calc(14vw+10px)] 3xl:left-[calc(16vw+10px)] p-8">
-    <img class="mt-4 w-full" src="<?php echo get_template_directory_uri(); ?>/assets/img/Sagiris.svg" alt="sagiris">
-    <img class="w-3/4 mx-auto mt-2" src="<?php echo get_template_directory_uri(); ?>/assets/img/Web-Development-v2.svg" alt="web development">
+    <img class="mt-4 w-full" width="429" height="56" src="<?php echo get_template_directory_uri(); ?>/assets/img/Sagiris.svg" alt="sagiris" fetchpriority="high">
+    <img class="w-3/4 mx-auto mt-2" width="171" height="23" src="<?php echo get_template_directory_uri(); ?>/assets/img/Web-Development-v2.svg" alt="web development">
   </div>
 </div>
-<div class="fp-content md:max-w-md xl:max-w-lg absolute flex flex-col flex-nowrap top-[70svh] md:top-[-5svh] md:right-[5svw] p-[1rem] mt-8">
+<div class="fp-content md:max-w-md xl:max-w-lg absolute flex flex-col flex-nowrap top-[70svh] md:top-[-5svh] md:right-0 p-[1rem] mt-8">
   <h1 class="font-bank-gothic text-4xl rounded-1 text-gray-300 max-w-96 border-b-3 border-gray-100 pb-3 ps-3 mx-6 mb-12">Latest News</h1>
   <div>
   <?php
@@ -57,4 +58,16 @@
   </div>
 </div>
 
+<script>
+(function() {
+  var fp = document.querySelector('.fp-content');
+  var main = document.querySelector('main');
+  if (!fp || !main) return;
+  function sync() {
+    main.style.minHeight = (fp.getBoundingClientRect().bottom - main.getBoundingClientRect().top) + 'px';
+  }
+  document.addEventListener('DOMContentLoaded', sync);
+  new ResizeObserver(sync).observe(document.body);
+})();
+</script>
 <?php get_footer(); ?>
