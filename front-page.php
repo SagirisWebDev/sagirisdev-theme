@@ -1,6 +1,6 @@
 <?php get_header(); ?>
 <main class="relative max-w-[1228px] w-[80%] mx-auto mt-8">
-<div class="graphics-wrapper absolute -z-1 left-[0%] top-[-10lvh] cap:left-[-153.5px]">
+<div class="graphics-wrapper absolute left-[0%] top-[-10lvh] cap:left-[-153.5px]">
   <div class="canvas-wrapper absolute top-[-5lvh] overflow-hidden">
     <canvas id="canvas" class="h-auto w-full aspect-square object-contain" style="opacity:0;transition:opacity 1.4s ease;"></canvas>
   </div>
