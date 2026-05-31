@@ -1,0 +1,148 @@
+name: Publish Theme
+
+on:
+  push:
+    branches:
+      - main
+
+concurrency:
+  group: theme-deploy
+  cancel-in-progress: false
+
+# --- Fill these in before the first run ---
+# REMOTE_USER / TARGET_SERVER / DESTINATION_PATH are kept here (not as secrets)
+# so they're visible in workflow runs. Move to secrets if you'd rather hide them.
+env:
+  REMOTE_USER: dh_ypzket
+  TARGET_SERVER: pdx1-shared-a1-44.dreamhost.com
+  DESTINATION_PATH: /home/dh_ypzket/sagirisdev.com/wp-content/themes/sagirisdev/
+  LIVE_URL: https://sagirisdev.com
+
+jobs:
+  deploy:
+    name: Build, snapshot, deploy, smoke-test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build JS bundle
+        run: npm run build
+
+      - name: Build Tailwind CSS
+        run: npm run style
+
+      - name: Snapshot live theme before deploy
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ env.TARGET_SERVER }}
+          username: ${{ env.REMOTE_USER }}
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            set -e
+            DEST="${{ env.DESTINATION_PATH }}"
+            DEST="${DEST%/}"
+            BAK="${DEST}.bak"
+            if [ -d "$BAK" ]; then
+              rm -rf "$BAK"
+            fi
+            if [ -d "$DEST" ]; then
+              cp -a "$DEST" "$BAK"
+              echo "Snapshot created at $BAK"
+            else
+              echo "No existing theme dir at $DEST; skipping snapshot (first deploy)."
+            fi
+
+      - name: Sync files via SFTP
+        uses: SamKirkland/web-deploy@v1
+        with:
+          target-server: ${{ env.TARGET_SERVER }}
+          remote-user: ${{ env.REMOTE_USER }}
+          private-ssh-key: ${{ secrets.SSH_KEY }}
+          destination-path: ${{ env.DESTINATION_PATH }}
+          exclude: >-
+            .git*
+            .github/**
+            .swd-harness/**
+            node_modules/**
+            assets/css/**
+            webpack.config.js
+            package.json
+            package-lock.json
+            .babelrc
+            README.md
+            *.md
+            /desktop-*.png
+            /mobile-*.png
+            /vw-*.png
+            /fp-*.png
+            /portfolio-*.png
+            /sample-*.png
+            /post-bg-*.png
+
+      - name: Smoke test live site
+        id: smoke
+        run: |
+          set -e
+          sleep 3
+          URL="${{ env.LIVE_URL }}/?cb=${{ github.run_id }}"
+          echo "Smoke-testing $URL"
+          BODY_FILE="$(mktemp)"
+          STATUS=$(curl -sS -L -o "$BODY_FILE" -w "%{http_code}" --max-time 30 "$URL" || echo "000")
+          echo "HTTP status: $STATUS"
+          if [ "$STATUS" != "200" ]; then
+            echo "::error::Smoke test failed: expected 200, got $STATUS"
+            exit 1
+          fi
+          if grep -q -i -E "There has been a critical error|Fatal error" "$BODY_FILE"; then
+            echo "::error::Smoke test failed: response body contains a WordPress fatal-error string"
+            exit 1
+          fi
+          echo "Smoke test passed."
+
+      - name: Rollback on failure
+        if: failure() && steps.smoke.outcome == 'failure'
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ env.TARGET_SERVER }}
+          username: ${{ env.REMOTE_USER }}
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            set -e
+            DEST="${{ env.DESTINATION_PATH }}"
+            DEST="${DEST%/}"
+            BAK="${DEST}.bak"
+            if [ -d "$BAK" ]; then
+              rm -rf "$DEST"
+              mv "$BAK" "$DEST"
+              echo "Rollback complete: restored $DEST from $BAK"
+            else
+              echo "::error::No snapshot found at $BAK; cannot roll back automatically."
+              exit 1
+            fi
+
+      - name: Clean up snapshot on success
+        if: success()
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ env.TARGET_SERVER }}
+          username: ${{ env.REMOTE_USER }}
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            DEST="${{ env.DESTINATION_PATH }}"
+            DEST="${DEST%/}"
+            BAK="${DEST}.bak"
+            if [ -d "$BAK" ]; then
+              rm -rf "$BAK"
+              echo "Snapshot $BAK removed."
+            fi
