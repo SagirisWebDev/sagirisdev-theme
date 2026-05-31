@@ -1570,6 +1570,31 @@ body.blog footer, body.page:not(.front-page) footer, body.error404 footer {
     background-color: color-mix(in oklab, var(--color-gray-400) 50%, transparent);
   }
 }
+.post-title-text {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 0% 2px;
+  background-position: left bottom;
+  background-repeat: no-repeat;
+  transition: background-size 0.4s ease-in-out;
+}
+a:hover .post-title-text {
+  background-size: 100% 2px;
+}
+.portfolio-site-card {
+  padding: 0.75rem;
+  border: 2px solid transparent;
+  border-radius: 15px;
+  transition: border-color 0.5s ease, background 0.5s ease;
+}
+.portfolio-site-card:hover {
+  border-color: var(--color-gray-100);
+  background: radial-gradient( ellipse 85% 85% at center, oklch(96.7% 0.003 264.542 / 0%) 0%, oklch(96.7% 0.003 264.542 / 0%) 55%, oklch(96.7% 0.003 264.542 / 8%) 72%, oklch(96.7% 0.003 264.542 / 25%) 84%, oklch(96.7% 0.003 264.542 / 60%) 93%, oklch(96.7% 0.003 264.542 / 90%) 97%, oklch(96.7% 0.003 264.542 / 100%) 98% );
+}
+@media (prefers-reduced-motion: reduce) {
+  .post-title-text, .portfolio-site-card {
+    transition: none;
+  }
+}
 .fp-content {
   anchor-name: --fp-content;
 }

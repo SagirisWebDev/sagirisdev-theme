@@ -46,7 +46,7 @@ $query = new WP_Query([
                        style="object-fit: cover;" />
                 </figure>
                 <h2 class="post-title font-bank-gothic font-semibold text-xl text-center">
-                  <?php the_title(); ?>
+                  <span class="post-title-text"><?php the_title(); ?></span>
                 </h2>
               </a>
             </li>
