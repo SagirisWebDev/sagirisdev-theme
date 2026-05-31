@@ -10,7 +10,6 @@ function sagirisdev_theme_support(){
   add_theme_support('title-tag');
   add_theme_support('custom-logo', $custom_logo_defaults);
   add_theme_support('post-thumbnails');
-  add_theme_support('custom-background');
   add_theme_support('editor-styles');
   add_editor_style('editor-styles.css');
 }

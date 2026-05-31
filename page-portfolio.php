@@ -1,5 +1,5 @@
 <?php get_header(); ?>
-<main class="relative max-w-[1350px] mx-auto mt-8">
+<main class="relative w-full max-w-[1350px] mx-auto mt-8">
 <div class="container-sm mb-5">
   <h1 class="font-bank-gothic text-4xl rounded-1 text-gray-300 max-w-96 border-b-3 border-gray-100 pb-3 ps-3 mx-6 mb-8"><?php the_title(); ?></h1>
   <div class="flex flex-wrap justify-start w-full md:ms-5 p-5">
