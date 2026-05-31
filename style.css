@@ -4,7 +4,7 @@ Theme Name: Sagiris Web Development
 Author: Sagiris Web Development
 Author URI: https://sagirisdev.ca
 Description: Custom WordPress theme for Sagiris Web Development, built with Tailwind CSS v4 and a WebGL hero animation.
-Version: 1.0
+Version: 1.1
 Requires at least: 5.0
 Tested up to: 6.1.1
 Requires PHP: 7.0
@@ -41,7 +41,6 @@ Text Domain: sagirisdev
     --color-black: #000;
     --color-white: #fff;
     --spacing: 0.25rem;
-    --breakpoint-md: 53.75rem;
     --container-xs: 20rem;
     --container-md: 28rem;
     --container-lg: 32rem;
@@ -80,8 +79,6 @@ Text Domain: sagirisdev
     --text-h2: 2.488rem;
     --text-h3: 2.074rem;
     --text-h4: 1.728rem;
-    --breakpoint-xl2xl: 88.125rem;
-    --breakpoint-cap: 95.9375rem;
   }
 }
 @layer base {
@@ -387,9 +384,6 @@ Text Domain: sagirisdev
   }
   .inline-flex {
     display: inline-flex;
-  }
-  .table {
-    display: table;
   }
   .aspect-square {
     aspect-ratio: 1 / 1;
