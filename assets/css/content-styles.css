@@ -103,3 +103,153 @@ h4 {
 .forminator-button.forminator-button-submit {
   background-color: #fff !important;
 }
+
+
+
+/* ------------- Single Post Styles --------------- */
+
+.post-container {
+  @apply max-w-[75ch] mx-auto
+}
+
+/* Scale the article title down one step so it doesn't overpower the page */
+.post-container h1 {
+  @apply text-h2
+}
+
+/* Section headings: scale down one step + gold left border for scannable hierarchy */
+.post-container h2 {
+  @apply text-h3 border-l-4 border-old-gold pl-3
+}
+
+.post-container h3 {
+  @apply border-l-2 border-gray-400 pl-3
+}
+
+/* General paragraph spacing within the post */
+.post-container p,
+.post-container .wp-block-group p {
+  @apply my-4
+}
+
+/* Inline code: subtle dark chip so it stands out from body text */
+.post-container :not(pre) > code {
+  background-color: oklch(0.18 0 0);
+  @apply px-1.5 py-0.5 rounded text-[0.88em] font-mono
+}
+
+/* Code blocks: scroll horizontally if they overflow the narrow column */
+.post-container pre {
+  @apply overflow-x-auto
+}
+
+/* Post metadata: date + reading time beneath the title */
+.post-meta {
+  @apply flex gap-4 text-gray-400 text-sm mb-6 font-blinker
+}
+
+/* Ensure heading anchors aren't hidden behind the fixed navbar */
+.post-container h2,
+.post-container h3,
+.post-container h4 {
+  scroll-margin-top: 5.5rem;
+}
+
+/* ── Post layout (content + TOC sidebar) ───────────────────────────── */
+
+/* On large screens, switch to a flex row and center the whole group */
+@media (min-width: 80rem) {
+  .post-layout {
+    display: flex;
+    align-items: flex-start;
+    gap: 3rem;
+    width: fit-content;
+    margin-inline: auto;
+  }
+
+  /* Fix the content column at 75ch so the layout width is predictable */
+  .post-layout .post-container {
+    width: 75ch;
+    flex-shrink: 0;
+    margin-inline: 0;
+  }
+}
+
+/* ── TOC sidebar ────────────────────────────────────────────────────── */
+
+.toc-sidebar {
+  display: none;
+}
+
+@media (min-width: 80rem) {
+  .toc-sidebar {
+    display: block;
+    width: 210px;
+    flex-shrink: 0;
+    position: sticky;
+    top: 5.5rem;
+    max-height: calc(100vh - 7rem);
+    overflow-y: auto;
+    padding-top: 1.5rem; /* align roughly with first paragraph */
+    scrollbar-width: thin;
+    scrollbar-color: oklch(0.25 0 0) transparent;
+  }
+}
+
+.toc-sidebar {
+  background: oklch(0.1 0 0 / 0.82);
+  border: 1px solid oklch(0.22 0 0);
+  border-radius: 0.5rem;
+  padding: 1rem 0.75rem 1.25rem;
+}
+
+.toc-title {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: oklch(0.62 0 0);
+  margin-bottom: 0.85rem;
+  font-family: var(--font-blinker-semibold);
+}
+
+#toc-nav {
+  display: flex;
+  flex-direction: column;
+}
+
+#toc-nav a {
+  display: block;
+  font-size: 0.925rem;
+  line-height: 1.45;
+  color: oklch(0.68 0 0);
+  padding: 0.32rem 0.5rem 0.32rem 0.75rem;
+  border-left: 2px solid transparent;
+  text-decoration: none;
+  transition: color 0.15s ease, border-color 0.15s ease, background-color 0.15s ease;
+  border-radius: 0 0.25rem 0.25rem 0;
+}
+
+#toc-nav a:hover {
+  color: oklch(0.88 0 0);
+  background-color: oklch(0.18 0 0 / 0.6);
+}
+
+#toc-nav a.toc-active {
+  color: #f3f4f6;
+  border-left-color: var(--color-old-gold);
+  background-color: oklch(0.18 0 0 / 0.7);
+}
+
+#toc-nav a.toc-h3 {
+  padding-left: 1.5rem;
+  font-size: 0.865rem;
+  color: oklch(0.58 0 0);
+}
+
+#toc-nav a.toc-h3:hover {
+  color: oklch(0.8 0 0);
+}
+
+#toc-nav a.toc-h3.toc-active {
+  color: #e5e7eb;
+}

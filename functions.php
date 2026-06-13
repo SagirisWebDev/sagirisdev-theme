@@ -44,6 +44,10 @@ function sagirisdev_register_styles_scripts() {
     wp_enqueue_script('sagirisdev-fp-height-sync', $theme_uri . '/assets/js/ui/fp-height-sync.js', array(), $version, true);
   }
 
+  if (is_singular('post')) {
+    wp_enqueue_script('sagirisdev-toc', $theme_uri . '/assets/js/ui/toc.js', array(), $version, true);
+  }
+
   /* WebGL emblem bundle preloaded on front page in header.php */
 }
 
@@ -58,7 +62,83 @@ add_filter('big_image_size_threshold', '__return_false');
 
 /**
  * Preserve JPEG Quality
- * 
+ *
  * @see https://developer.wordpress.org/reference/hooks/jpeg_quality/
  */
 add_filter('jpeg_quality', function() { return 100; });
+
+/**
+ * Shopify password proxy for the Common Roast demo store.
+ *
+ * Intercepts /common-roast-access and serves a self-submitting form that
+ * POSTs the storefront password directly to Shopify in the user's browser,
+ * bypassing the manual password screen.
+ */
+function sagirisdev_common_roast_proxy() {
+    if ( ! isset( $_SERVER['REQUEST_URI'] ) ) {
+        return;
+    }
+    $path = rtrim( parse_url( $_SERVER['REQUEST_URI'], PHP_URL_PATH ), '/' );
+    if ( $path !== '/common-roast-access' ) {
+        return;
+    }
+
+    nocache_headers();
+    status_header( 200 );
+
+    $shopify_password_url = 'https://common-roast.myshopify.com/password';
+    $store_password       = 'my store';
+    $logo_url             = get_template_directory_uri() . '/assets/img/emblemv2-white.png';
+    $bg_url               = get_template_directory_uri() . '/assets/img/black-sand-1.webp';
+
+    ?><!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Redirecting to Common Roast&hellip;</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      min-height: 100svh;
+      background: #000 url('<?php echo esc_url( $bg_url ); ?>') center top / cover fixed;
+      color: #f3f4f6;
+      font-family: ui-sans-serif, system-ui, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1.25rem;
+    }
+    img { width: 48px; height: auto; opacity: 0.75; }
+    p   { font-size: 1.05rem; opacity: 0.55; letter-spacing: 0.08em; }
+    noscript a { color: oklch(0.8061 0.1596 103); text-underline-offset: 3px; }
+  </style>
+</head>
+<body>
+  <img src="<?php echo esc_url( $logo_url ); ?>" alt="Sagiris Web Dev">
+  <p id="msg">Redirecting</p>
+
+  <form id="cr-auth" method="post" action="<?php echo esc_url( $shopify_password_url ); ?>" hidden>
+    <input type="hidden" name="form_type" value="storefront_password">
+    <input type="hidden" name="utf8"      value="✓">
+    <input type="hidden" name="password"  value="<?php echo esc_attr( $store_password ); ?>">
+  </form>
+
+  <noscript>
+    <p>JavaScript is required. <a href="<?php echo esc_url( $shopify_password_url ); ?>">Open the store</a> and enter the password manually.</p>
+  </noscript>
+
+  <script>
+    // Animate the ellipsis while the form submits
+    var dots = 0;
+    var el = document.getElementById('msg');
+    setInterval(function() { dots = (dots + 1) % 4; el.textContent = 'Redirecting' + '.'.repeat(dots); }, 350);
+    document.getElementById('cr-auth').submit();
+  </script>
+</body>
+</html>
+<?php
+    exit();
+}
+add_action( 'template_redirect', 'sagirisdev_common_roast_proxy', 1 );
