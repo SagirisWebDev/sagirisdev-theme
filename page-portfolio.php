@@ -13,6 +13,9 @@
       <li class="me-2" role="presentation">
         <button class="inline-block p-4 rounded-t-lg cursor-pointer" id="plugins-styled-tab" data-tabs-target="#styled-plugins" type="button" role="tab" aria-controls="plugins" aria-selected="false">Plugins</button>
       </li>
+      <li class="me-2" role="presentation">
+        <button class="inline-block p-4 rounded-t-lg cursor-pointer" id="themes-styled-tab" data-tabs-target="#styled-themes" type="button" role="tab" aria-controls="themes" aria-selected="false">Themes</button>
+      </li>
     </ul>
 
     <div id="default-styled-tab-content" class="font-blinker flex flex-wrap w-fit max-w-[1200px] text-lg text-gray-100 xl:border-s-2 border-gray-100 md:p-5">
@@ -32,6 +35,12 @@
         'post_type'  => 'swd_plugin',
         'panel_id'   => 'styled-plugins',
         'aria_label' => 'plugins-tab',
+        'hidden'     => true,
+      ]);
+      get_template_part('template-parts/portfolio-grid', null, [
+        'post_type'  => 'swd_theme',
+        'panel_id'   => 'styled-themes',
+        'aria_label' => 'themes-tab',
         'hidden'     => true,
       ]);
       ?>

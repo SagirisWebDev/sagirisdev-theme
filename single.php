@@ -1,6 +1,6 @@
 <?php
 	get_header();
-	$is_portfolio = (get_post_type() === 'swd_site' || get_post_type() === 'swd_block' || get_post_type() === 'swd_plugin');
+	$is_portfolio = (get_post_type() === 'swd_site' || get_post_type() === 'swd_block' || get_post_type() === 'swd_plugin' || get_post_type() === 'swd_theme');
 	$prev_link = $is_portfolio ? 'portfolio' : 'blog-posts';
 	$prev_link_text = $is_portfolio ? 'Return to Portfolio' : 'Return to Blog';
 
