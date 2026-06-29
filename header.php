@@ -22,7 +22,7 @@
       wp_body_open();
     }
     ?>
-  <header class="relative z-1 w-full md:w-[98vw] md:px-3 mx-auto cap:max-w-[1535px] cap:mx-auto top-0 flex flex-wrap sm:justify-start sm:flex-nowrap bg-transparent text-sm py-3">
+  <header class="site-header fixed inset-x-0 z-50 w-full md:w-[98vw] md:px-3 mx-auto cap:max-w-[1535px] cap:mx-auto top-0 flex flex-wrap sm:justify-start sm:flex-nowrap text-sm pt-3">
     <nav class="w-full flex flex-wrap items-center <?php echo esc_attr(!is_front_page() ?  "justify-between" : "justify-end"); ?>">
       <?php
       if (!is_front_page()) { 

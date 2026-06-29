@@ -81,10 +81,58 @@ html {
   background-attachment: fixed;
 }
 
+.site-header {
+  background-color: #000;
+  background-image: url(assets/img/black-sand-1.webp);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center top;
+  background-attachment: scroll;
+}
+
+body.home .site-header {
+  background-color: transparent;
+  background-image: none;
+}
+
+body:not(.home) {
+  padding-top: 78px;
+}
+
+/* CTA group on swd_plugin posts: sits to the LEFT of the featured image
+   at the same height, with the two buttons distributed top-and-bottom
+   and horizontally centered. */
+.swd-plugin-cta {
+  flex-direction: column;
+  width: fit-content;
+  order: -1;
+  align-self: stretch;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.swd-plugin-cta .wp-block-button {
+  margin: 1rem;
+}
+
+@media (max-width: 47.99rem) {
+  .swd-plugin-cta {
+    flex-direction: row;
+  }
+}
+
 /* Front page: paint the bg via a fixed pseudo-element so it stays
    viewport-centered regardless of html's overflow:clip context. */
 html:has(body.home) {
   background-image: none;
+}
+
+/* Fade the bottom of the WebGL canvas to transparent so the body's
+   black-sand-1.webp background blends in seamlessly where the
+   animation ends. */
+body.home #canvas {
+  -webkit-mask-image: linear-gradient(to bottom, #000 60%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 60%, transparent 100%);
 }
 body.home::before {
   content: "";
@@ -101,12 +149,52 @@ body.home::before {
   pointer-events: none;
 }
 
-body.home footer {
-  position: static;
+/* Front-page posts container: explicit height with internal scroll. On desktop
+   this combined with the fixed graphics-wrapper produces a parallax effect
+   (canvas stays put, content scrolls inside). On mobile it caps the latest-news
+   block so the footer doesn't sit miles below the fold. */
+body.home .fp-content > div {
+  height: 60svh;
+  overflow-y: auto;
+}
+
+/* Mobile home: footer flows in normal layout after the fp-content block
+   (fp-height-sync.js stretches main to contain it). */
+@media (max-width: 53.74rem) {
+  body.home footer {
+    position: static;
+  }
+}
+
+@media (min-width: 53.75rem) {
+  /* Desktop home: viewport-locked layout. The canvas/logo wrapper becomes a
+     fixed parallax background, the footer pins to the viewport bottom, and the
+     page itself does not scroll. */
+  body.home {
+    height: 100svh;
+    overflow: hidden;
+  }
+  body.home .graphics-wrapper {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    transform: translateX(12vw);
+  }
+  body.home .canvas-wrapper {
+    top: 0;
+  }
+  body.home footer {
+    position: fixed;
+    top: auto;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    max-height: 3.5rem;
+  }
 }
 
 body.blog,
-body.page:not(.front-page),
+body.page:not(.home),
 body.error404 {
   display: flex;
   flex-direction: column;
@@ -114,13 +202,13 @@ body.error404 {
 }
 
 body.blog main,
-body.page:not(.front-page) main,
+body.page:not(.home) main,
 body.error404 main {
   flex: 1;
 }
 
 body.blog footer,
-body.page:not(.front-page) footer,
+body.page:not(.home) footer,
 body.error404 footer {
   position: static;
 }

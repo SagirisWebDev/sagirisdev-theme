@@ -1,10 +1,10 @@
 <?php get_header(); ?>
-<main class="relative max-w-[1228px] w-[80%] mx-auto mt-8">
+<main class="relative max-w-[1228px] w-[80%] mx-auto mt-[78px]">
 <div class="graphics-wrapper absolute left-[0%] top-[-10lvh] cap:left-[-153.5px]">
   <div class="canvas-wrapper absolute top-[-5lvh] overflow-hidden">
     <canvas id="canvas" class="h-auto w-full aspect-square object-contain" style="opacity:0;transition:opacity 1.4s ease;"></canvas>
   </div>
-  <div class="logo absolute w-[85vw] md:w-[330px] lg:w-[380px] xl:w-[430px] cap:w-[450px] max-w-[300px] md:max-w-[330px] lg:max-w-[380px] xl:max-w-[430px] cap:max-w-[450px] flex flex-col flex-nowrap top-[45svh] left-[calc(40vw-150px)] md:left-[calc(15vw-165px)] lg:left-[calc(15vw-190px)] xl:left-[calc(15vw-215px)] cap:left-[159px] p-8">
+  <div class="logo absolute w-[85vw] md:w-[330px] lg:w-[380px] xl:w-[430px] cap:w-[450px] max-w-[300px] md:max-w-[330px] lg:max-w-[380px] xl:max-w-[430px] cap:max-w-[450px] flex flex-col flex-nowrap top-[45svh] left-[calc(40vw-150px)] md:left-[calc(15vw-161px)] lg:left-[calc(15vw-187px)] xl:left-[calc(15vw-213px)] cap:left-[161px] p-8">
     <img class="mt-4 w-full" width="429" height="56" src="<?php echo get_template_directory_uri(); ?>/assets/img/Sagiris.svg" alt="sagiris" fetchpriority="high">
     <img class="w-3/4 mx-auto mt-2" width="171" height="23" src="<?php echo get_template_directory_uri(); ?>/assets/img/Web-Development-v2.svg" alt="web development">
   </div>

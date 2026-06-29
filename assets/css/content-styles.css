@@ -5,11 +5,15 @@ body {
 }
 
 h1, h2 {
-  @apply font-bank-gothic-bold my-6
+  @apply font-bank-gothic-bold my-6 max-w-full break-words
 }
 
 h3, h4 {
-  @apply font-bank-gothic my-6
+  @apply font-bank-gothic my-6 max-w-full break-words
+}
+
+.wp-block-post-title {
+  @apply max-w-full break-words
 }
 
 h1 {
@@ -45,8 +49,28 @@ h4 {
   @apply w-full items-start
 }
 
+.wp-block-group:has(> .cont-wrap) {
+  @apply mt-8
+}
+
+.wp-block-group:has(> .swd-plugin-cta) {
+  justify-content: space-evenly;
+}
+
+.cont-wrap > .wp-block-group {
+  align-self: stretch;
+}
+
 .cont-wrap {
-  @apply max-w-[60ch] p-4
+  @apply max-w-[60ch] p-4 flex-1 self-stretch
+}
+
+.cont-wrap:first-child > * {
+  @apply mt-0
+}
+
+.cont-wrap:nth-child(2) > :first-child {
+  @apply mb-8
 }
 
 .wp-block-post-featured-image {

@@ -256,6 +256,9 @@ Text Domain: sagirisdev
   .static {
     position: static;
   }
+  .inset-x-0 {
+    inset-inline: calc(var(--spacing) * 0);
+  }
   .top-0 {
     top: calc(var(--spacing) * 0);
   }
@@ -277,8 +280,8 @@ Text Domain: sagirisdev
   .left-\[calc\(40vw-150px\)\] {
     left: calc(40vw - 150px);
   }
-  .z-1 {
-    z-index: 1;
+  .z-50 {
+    z-index: 50;
   }
   .container {
     width: 100%;
@@ -309,6 +312,9 @@ Text Domain: sagirisdev
     @media (width >= 114.75rem) {
       max-width: 114.75rem;
     }
+  }
+  .m-0 {
+    margin: calc(var(--spacing) * 0);
   }
   .mx-2 {
     margin-inline: calc(var(--spacing) * 2);
@@ -345,6 +351,9 @@ Text Domain: sagirisdev
   }
   .mt-8 {
     margin-top: calc(var(--spacing) * 8);
+  }
+  .mt-\[78px\] {
+    margin-top: 78px;
   }
   .mb-2 {
     margin-bottom: calc(var(--spacing) * 2);
@@ -390,6 +399,9 @@ Text Domain: sagirisdev
   }
   .inline-flex {
     display: inline-flex;
+  }
+  .table {
+    display: table;
   }
   .aspect-square {
     aspect-ratio: 1 / 1;
@@ -463,6 +475,9 @@ Text Domain: sagirisdev
   .resize {
     resize: both;
   }
+  .list-none {
+    list-style-type: none;
+  }
   .flex-col {
     flex-direction: column;
   }
@@ -495,6 +510,9 @@ Text Domain: sagirisdev
   }
   .gap-2 {
     gap: calc(var(--spacing) * 2);
+  }
+  .gap-4 {
+    gap: calc(var(--spacing) * 4);
   }
   .gap-5 {
     gap: calc(var(--spacing) * 5);
@@ -594,11 +612,11 @@ Text Domain: sagirisdev
       background-color: color-mix(in oklab, var(--color-old-gold) 75%, transparent);
     }
   }
-  .bg-transparent {
-    background-color: transparent;
-  }
   .object-contain {
     object-fit: contain;
+  }
+  .p-0 {
+    padding: calc(var(--spacing) * 0);
   }
   .p-2 {
     padding: calc(var(--spacing) * 2);
@@ -636,9 +654,6 @@ Text Domain: sagirisdev
   .py-2 {
     padding-block: calc(var(--spacing) * 2);
   }
-  .py-3 {
-    padding-block: calc(var(--spacing) * 3);
-  }
   .py-4 {
     padding-block: calc(var(--spacing) * 4);
   }
@@ -647,6 +662,9 @@ Text Domain: sagirisdev
   }
   .ps-3 {
     padding-inline-start: calc(var(--spacing) * 3);
+  }
+  .pt-3 {
+    padding-top: calc(var(--spacing) * 3);
   }
   .pb-3 {
     padding-bottom: calc(var(--spacing) * 3);
@@ -748,6 +766,9 @@ Text Domain: sagirisdev
   }
   .blur {
     --tw-blur: blur(8px);
+    filter: var(--tw-blur,) var(--tw-brightness,) var(--tw-contrast,) var(--tw-grayscale,) var(--tw-hue-rotate,) var(--tw-invert,) var(--tw-saturate,) var(--tw-sepia,) var(--tw-drop-shadow,);
+  }
+  .filter {
     filter: var(--tw-blur,) var(--tw-brightness,) var(--tw-contrast,) var(--tw-grayscale,) var(--tw-hue-rotate,) var(--tw-invert,) var(--tw-saturate,) var(--tw-sepia,) var(--tw-drop-shadow,);
   }
   .transition {
@@ -873,6 +894,13 @@ Text Domain: sagirisdev
     &:hover {
       @media (hover: hover) {
         color: var(--color-gray-400);
+      }
+    }
+  }
+  .hover\:text-neutral-300 {
+    &:hover {
+      @media (hover: hover) {
+        color: var(--color-neutral-300);
       }
     }
   }
@@ -1083,9 +1111,9 @@ Text Domain: sagirisdev
       left: 1vw;
     }
   }
-  .md\:left-\[calc\(15vw-165px\)\] {
+  .md\:left-\[calc\(15vw-161px\)\] {
     @media (width >= 53.75rem) {
-      left: calc(15vw - 165px);
+      left: calc(15vw - 161px);
     }
   }
   .md\:ms-5 {
@@ -1133,6 +1161,16 @@ Text Domain: sagirisdev
       flex-direction: row;
     }
   }
+  .md\:items-center {
+    @media (width >= 53.75rem) {
+      align-items: center;
+    }
+  }
+  .md\:justify-between {
+    @media (width >= 53.75rem) {
+      justify-content: space-between;
+    }
+  }
   .md\:p-4 {
     @media (width >= 53.75rem) {
       padding: calc(var(--spacing) * 4);
@@ -1153,9 +1191,9 @@ Text Domain: sagirisdev
       padding-block: calc(var(--spacing) * 4);
     }
   }
-  .lg\:left-\[calc\(15vw-190px\)\] {
+  .lg\:left-\[calc\(15vw-187px\)\] {
     @media (width >= 64rem) {
-      left: calc(15vw - 190px);
+      left: calc(15vw - 187px);
     }
   }
   .lg\:w-\[380px\] {
@@ -1168,9 +1206,9 @@ Text Domain: sagirisdev
       max-width: 380px;
     }
   }
-  .xl\:left-\[calc\(15vw-215px\)\] {
+  .xl\:left-\[calc\(15vw-213px\)\] {
     @media (width >= 80rem) {
-      left: calc(15vw - 215px);
+      left: calc(15vw - 213px);
     }
   }
   .xl\:w-\[430px\] {
@@ -1237,9 +1275,9 @@ Text Domain: sagirisdev
       left: -153.5px;
     }
   }
-  .cap\:left-\[159px\] {
+  .cap\:left-\[161px\] {
     @media (width >= 95.9375rem) {
-      left: 159px;
+      left: 161px;
     }
   }
   .cap\:mx-auto {
@@ -1351,11 +1389,19 @@ body {
 }
 h1, h2 {
   margin-block: calc(var(--spacing) * 6);
+  max-width: 100%;
   font-family: var(--font-bank-gothic-bold);
+  overflow-wrap: break-word;
 }
 h3, h4 {
   margin-block: calc(var(--spacing) * 6);
+  max-width: 100%;
   font-family: var(--font-bank-gothic);
+  overflow-wrap: break-word;
+}
+.wp-block-post-title {
+  max-width: 100%;
+  overflow-wrap: break-word;
 }
 h1 {
   font-size: var(--text-h1);
@@ -1385,9 +1431,26 @@ h4 {
   width: 100%;
   align-items: flex-start;
 }
+.wp-block-group:has(> .cont-wrap) {
+  margin-top: calc(var(--spacing) * 8);
+}
+.wp-block-group:has(> .swd-plugin-cta) {
+  justify-content: space-evenly;
+}
+.cont-wrap > .wp-block-group {
+  align-self: stretch;
+}
 .cont-wrap {
   max-width: 60ch;
+  flex: 1;
+  align-self: stretch;
   padding: calc(var(--spacing) * 4);
+}
+.cont-wrap:first-child > * {
+  margin-top: calc(var(--spacing) * 0);
+}
+.cont-wrap:nth-child(2) > :first-child {
+  margin-bottom: calc(var(--spacing) * 8);
 }
 .wp-block-post-featured-image {
   padding: calc(var(--spacing) * 4);
@@ -1664,8 +1727,43 @@ html {
   background-position: center top;
   background-attachment: fixed;
 }
+.site-header {
+  background-color: #000;
+  background-image: url(assets/img/black-sand-1.webp);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center top;
+  background-attachment: scroll;
+}
+body.home .site-header {
+  background-color: transparent;
+  background-image: none;
+}
+body:not(.home) {
+  padding-top: 78px;
+}
+.swd-plugin-cta {
+  flex-direction: column;
+  width: fit-content;
+  order: -1;
+  align-self: stretch;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.swd-plugin-cta .wp-block-button {
+  margin: 1rem;
+}
+@media (max-width: 47.99rem) {
+  .swd-plugin-cta {
+    flex-direction: row;
+  }
+}
 html:has(body.home) {
   background-image: none;
+}
+body.home #canvas {
+  -webkit-mask-image: linear-gradient(to bottom, #000 60%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 60%, transparent 100%);
 }
 body.home::before {
   content: "";
@@ -1681,18 +1779,47 @@ body.home::before {
   z-index: -1;
   pointer-events: none;
 }
-body.home footer {
-  position: static;
+body.home .fp-content > div {
+  height: 60svh;
+  overflow-y: auto;
 }
-body.blog, body.page:not(.front-page), body.error404 {
+@media (max-width: 53.74rem) {
+  body.home footer {
+    position: static;
+  }
+}
+@media (min-width: 53.75rem) {
+  body.home {
+    height: 100svh;
+    overflow: hidden;
+  }
+  body.home .graphics-wrapper {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    transform: translateX(12vw);
+  }
+  body.home .canvas-wrapper {
+    top: 0;
+  }
+  body.home footer {
+    position: fixed;
+    top: auto;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    max-height: 3.5rem;
+  }
+}
+body.blog, body.page:not(.home), body.error404 {
   display: flex;
   flex-direction: column;
   min-height: 100svh;
 }
-body.blog main, body.page:not(.front-page) main, body.error404 main {
+body.blog main, body.page:not(.home) main, body.error404 main {
   flex: 1;
 }
-body.blog footer, body.page:not(.front-page) footer, body.error404 footer {
+body.blog footer, body.page:not(.home) footer, body.error404 footer {
   position: static;
 }
 .wp-image-1017 {
